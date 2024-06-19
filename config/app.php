@@ -146,7 +146,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Autoloaded Service Providers
+    | Autoloaded Servic Providers
     |--------------------------------------------------------------------------
     |
     | The service providers listed here will be automatically loaded on the
