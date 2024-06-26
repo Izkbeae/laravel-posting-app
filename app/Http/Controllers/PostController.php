@@ -3,26 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function index() {
-        // productsテーブルからすべてのデータを取得し、変数$productsに代入する
-        $posts = DB::table('posts')->get();
-
-        // 変数$productsをproducts/index.blade.phpファイルに渡す
-        return view('posts.index', compact('posts'));
+    public function create()
+    {
+        return view('posts.create');
     }
 
-    public function show($id) {
-        // URL'/products/{id}'の'{id}'部分と主キー（idカラム）の値が一致するデータをproductsテーブルから取得し、変数$productに代入する
-        $post = Post::find($id);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|max:20',
+            'content' => 'required|max:200',
+        ]);
 
-        // 変数$productをproducts/show.blade.phpファイルに渡す
-        return view('posts.show', compact('post'));
+        // データの保存
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
+        // 投稿一覧ページにリダイレクト
+        return redirect('/posts');
     }
 
-
+    // 投稿一覧を表示するメソッド
+    public function index()
+    {
+        // 全ての投稿を取得
+        $posts = Post::all();
+        return view('posts.index', ['posts' => $posts]);
+    }
 }

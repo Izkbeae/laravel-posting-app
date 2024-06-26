@@ -9,11 +9,6 @@
  
  <body>
      <table>
-         <tr>
-             <th>ID</th>
-             <td>{{ $post->id }}</td>
-         </tr>
-         <tr>
              <th>タイトル</th>
              <td>{{ $post->title }}</td>
          </tr>
