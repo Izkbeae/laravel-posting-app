@@ -13,11 +13,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Auth::user()->posts()->orderBy('updated_at', 'asc')->get();
-        foreach ($posts as $post ) {
-            $post->title='阿部瑞樹';
-            $post->save();
-            dd($post->title);
-            }
+
         return view('posts.index', compact('posts'));
     }
 
